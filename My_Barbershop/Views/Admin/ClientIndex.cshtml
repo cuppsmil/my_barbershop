@@ -1,0 +1,56 @@
+﻿@model IEnumerable<My_Barbershop.Models.Client>
+@{
+    ViewData["Title"] = "Клиенты";
+    Layout = "_Layout";
+}
+
+<h2>Клиенты</h2>
+<a asp-action="Dashboard" class="btn btn-success mb-3">Перейти к панели администратора</a>
+<a asp-action="CreateClient" class="btn btn-success mb-3">Добавить клиента</a>
+<form method="get" asp-action="ClientIndex">
+    <div class="input-group mb-3">
+        <input type="text" name="search" value="@ViewBag.Search" class="form-control" placeholder="Поиск по ФИО или телефону" />
+        <button class="btn btn-outline-secondary" type="submit">Поиск</button>
+    </div>
+    <a asp-action="ExportClientToExcel"
+       asp-route-sortField="@ViewBag.SortField"
+       asp-route-sortOrder="@ViewBag.SortOrder"
+       asp-route-search="@ViewBag.Search"
+       class="btn btn-success mb-3">Экспортировать в Excel</a>
+</form>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="ClientIndex"
+                   asp-route-sortField="ClientPhnum"
+                   asp-route-sortOrder="@(ViewBag.SortField == "ClientPhnum" && ViewBag.SortOrder == "asc" ? "desc" : "asc")">
+                    Телефон
+                </a>
+            </th>
+            <th>
+                <a asp-action="ClientIndex"
+                   asp-route-sortField="ClFio"
+                   asp-route-sortOrder="@(ViewBag.SortField == "ClFio" && ViewBag.SortOrder == "asc" ? "desc" : "asc")">
+                    ФИО
+                </a>
+            </th>
+            <th>Записи</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ClientPhnum</td>
+                <td>@item.ClFio</td>
+                <td>@item.AppointmentCount</td>
+                <td>
+                    <a asp-action="EditClient" asp-route-id="@item.ClientPhnum" class="btn btn-sm btn-primary">Редактировать</a>
+                    <a asp-action="DeleteClient" asp-route-id="@item.ClientPhnum" class="btn btn-sm btn-danger">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

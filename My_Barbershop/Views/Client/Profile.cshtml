@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Профиль клиента";
+    Layout = "_Layout";
+}
+
+<div class="text-center mt-5">
+    <h1 class="display-4">Добро пожаловать, Клиент!</h1>
+    <p>Здесь вы можете управлять своими записями.</p>
+
+    <div class="list-group w-50 mx-auto">
+        <a asp-controller="Client" asp-action="BookAppointment" class="list-group-item list-group-item-action">Записаться на стрижку</a>
+        <a asp-controller="Client" asp-action="MyAppointments" class="list-group-item list-group-item-action">Мои записи</a>
+        <a asp-controller="Client" asp-action="ListServices" class="list-group-item list-group-item-action">Список услуг</a>
+        <a asp-controller="Account" asp-action="Login" class="list-group-item list-group-item-action text-danger">Выйти</a>
+    </div>
+</div>

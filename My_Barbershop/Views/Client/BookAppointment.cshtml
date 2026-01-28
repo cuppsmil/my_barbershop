@@ -1,0 +1,56 @@
+﻿@model My_Barbershop.Models.Appointment
+@{
+    ViewData["Title"] = "Запись на стрижку";
+    Layout = "_Layout";
+}
+
+<h4>Запись на стрижку</h4>
+
+<form asp-action="BookAppointment" method="post">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label>Номер телефона</label>
+            <input asp-for="Clientphone" class="form-control" placeholder="Введите ваш номер телефона" required />
+            <span asp-validation-for="Clientphone" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Барбершоп</label>
+            <select asp-for="Barberpassport" class="form-control">
+                <option value="">-- Выберите барбера --</option>
+                @foreach (var barber in ViewBag.Barbers ?? new List<Barber>())
+                {
+                    <option value="@barber.BarberPassport">@barber.BarberFio — @barber.BNumNavigation?.Name</option>
+                }
+            </select>
+            <span asp-validation-for="Barberpassport" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Услуга</label>
+            <select asp-for="Servicename" class="form-control">
+                <option value="">-- Выберите услугу --</option>
+                @foreach (var service in ViewBag.Services ?? new List<Service>())
+                {
+                    <option value="@service.ServName">@service.ServName — @service.ServPrice ₽, @service.Durofwork мин.</option>
+                }
+            </select>
+            <span asp-validation-for="Servicename" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Дата</label>
+            <input asp-for="Appointmentdate" type="date" class="form-control" required />
+            <span asp-validation-for="Appointmentdate" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Время</label>
+            <input asp-for="Appointmenttime" type="time" class="form-control" min="08:00" max="20:00" required />
+            <span asp-validation-for="Appointmenttime" class="text-danger"></span>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Записаться</button>
+    <a asp-action="Profile" class="btn btn-secondary">Назад</a>
+</form>

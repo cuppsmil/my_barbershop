@@ -1,0 +1,44 @@
+﻿@model My_Barbershop.Models.Barber
+
+@{
+    ViewData["Title"] = "Редактировать барбера";
+    Layout = "_Layout";
+}
+
+<h4>Редактировать данные барбера</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="EditBarber">
+            <input type="hidden" asp-for="BarberPassport" />
+
+            <div class="form-group mb-3">
+                <label asp-for="BarberFio" class="control-label"></label>
+                <input asp-for="BarberFio" class="form-control" />
+                <span asp-validation-for="BarberFio" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="BarberPhnumber" class="control-label"></label>
+                <input asp-for="BarberPhnumber" class="form-control" />
+                <span asp-validation-for="BarberPhnumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="BNum" class="control-label">Барбершоп</label>
+                <select asp-for="BNum" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.Barbershops, "Id", "Name"))">
+                    <option value="">-- Выберите барбершоп --</option>
+                </select>
+                <span asp-validation-for="BNum" class="text-danger"></span>
+            </div>
+           
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+                <a asp-action="BarberIndex" class="btn btn-secondary">Назад к списку</a>
+            </div>
+        </form>
+    </div>
+</div>

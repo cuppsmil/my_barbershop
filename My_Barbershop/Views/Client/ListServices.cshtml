@@ -1,0 +1,28 @@
+﻿@model IEnumerable<My_Barbershop.Models.Service>
+@{
+    ViewData["Title"] = "Список услуг";
+    Layout = "_Layout";
+}
+
+<h4>Список услуг</h4>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Стоимость</th>
+            <th>Длительность</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var service in Model)
+        {
+            <tr>
+                <td>@service.ServName</td>
+                <td>@service.ServPrice ₽</td>
+                <td>@service.Durofwork мин.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Profile" class="btn btn-secondary">Назад</a>

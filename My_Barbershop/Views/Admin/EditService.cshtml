@@ -1,0 +1,31 @@
+﻿@model My_Barbershop.Models.ViewModels.ServiceViewModel
+
+@{
+    ViewData["Title"] = "Редактировать услугу";
+    Layout = "_Layout";
+}
+
+<h4>Редактировать данные услуги</h4>
+<form asp-action="EditService" method="post">
+    <input type="hidden" asp-for="ServName" />
+
+    <div class="form-group mb-3">
+        <label asp-for="ServName">Название</label>
+        <input asp-for="ServName" class="form-control" readonly />
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Durofwork">Длительность (мин.)</label>
+        <input asp-for="Durofwork" class="form-control" />
+        <span asp-validation-for="Durofwork" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="ServPrice">Стоимость</label>
+        <input asp-for="ServPrice" class="form-control" />
+        <span asp-validation-for="ServPrice" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a asp-action="ServiceIndex" class="btn btn-secondary">Отмена</a>
+</form>

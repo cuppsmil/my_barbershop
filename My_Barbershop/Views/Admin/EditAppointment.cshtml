@@ -1,0 +1,54 @@
+﻿@model My_Barbershop.Models.ViewModels.AppointmentViewModel
+
+@{
+    ViewData["Title"] = "Редактировать запись";
+    Layout = "_Layout";
+}
+
+<h4>Редактировать данные записи</h4>
+<form asp-action="EditAppointment" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group mb-3">
+        <label asp-for="Appointmentdate">Дата</label>
+        <input asp-for="Appointmentdate" type="date" class="form-control" />
+        <span asp-validation-for="Appointmentdate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Appointmenttime">Время</label>
+        <input asp-for="Appointmenttime" type="time" class="form-control" />
+        <span asp-validation-for="Appointmenttime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Barberpassport">Барбер</label>
+        <select asp-for="Barberpassport" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Barbers, "BarberPassport", "BarberFio"))">
+            <option value="">-- Выберите барбера --</option>
+        </select>
+        <span asp-validation-for="Barberpassport" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Clientphone">Клиент</label>
+        <select asp-for="Clientphone" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Clients, "ClientPhnum", "ClFio"))">
+            <option value="">-- Выберите клиента --</option>
+        </select>
+        <span asp-validation-for="Clientphone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Servicename">Услуга</label>
+        <select asp-for="Servicename" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Services, "ServName", "ServName"))">
+            <option value="">-- Выберите услугу --</option>
+        </select>
+        <span asp-validation-for="Servicename" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a asp-action="AppointmentIndex" class="btn btn-secondary">Отмена</a>
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+</form>

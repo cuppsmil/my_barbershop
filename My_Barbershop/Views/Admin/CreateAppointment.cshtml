@@ -1,0 +1,52 @@
+﻿@model My_Barbershop.Models.ViewModels.AppointmentViewModel
+@{
+    ViewData["Title"] = "Новая запись";
+    Layout = "_Layout";
+}
+
+<h4>Новая запись</h4>
+<hr />
+<form asp-action="CreateAppointment" method="post">
+    <div class="form-group mb-3">
+        <label>Дата</label>
+        <input asp-for="Appointmentdate" type="date" class="form-control" required />
+        <span asp-validation-for="Appointmentdate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Время</label>
+        <input asp-for="Appointmenttime" type="time" class="form-control" required />
+        <span asp-validation-for="Appointmenttime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Барбер</label>
+        <select asp-for="Barberpassport" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Barbers, "BarberPassport", "BarberFio"))">
+            <option value="">-- Выберите барбера --</option>
+        </select>
+        <span asp-validation-for="Barberpassport" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Клиент</label>
+        <select asp-for="Clientphone" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Clients, "ClientPhnum", "ClFio"))">
+            <option value="">-- Выберите клиента --</option>
+        </select>
+        <span asp-validation-for="Clientphone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Услуга</label>
+        <select asp-for="Servicename" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Services, "ServName", "ServName"))">
+            <option value="">-- Выберите услугу --</option>
+        </select>
+        <span asp-validation-for="Servicename" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a asp-action="AppointmentIndex" class="btn btn-secondary">Отмена</a>
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+</form>

@@ -1,0 +1,53 @@
+﻿@model My_Barbershop.Models.ViewModels.RegisterAdminViewModel
+@{
+    ViewData["Title"] = "Регистрация администратора";
+    Layout = "_Layout";
+}
+
+<h2>Регистрация администратора</h2>
+
+<form asp-action="RegisterAdmin" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group mb-3">
+        <label asp-for="AdminPassport"></label>
+        <input asp-for="AdminPassport" class="form-control" />
+        <span asp-validation-for="AdminPassport" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="AdmFio"></label>
+        <input asp-for="AdmFio" class="form-control" />
+        <span asp-validation-for="AdmFio" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="AdminPhnumber"></label>
+        <input asp-for="AdminPhnumber" class="form-control" type="tel" />
+        <span asp-validation-for="AdminPhnumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="BNum">Барбершоп</label>
+        <select asp-for="BNum" class="form-control" asp-items="@(new SelectList(ViewBag.Barbershops, "Id", "Name"))">
+            <option value="">-- Выберите барбершоп --</option>
+        </select>
+        <span asp-validation-for="BNum" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" type="password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="ConfirmPassword"></label>
+        <input asp-for="ConfirmPassword" class="form-control" type="password" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+    <p>Уже зарегистрирован?</p>
+    <a asp-action="Login" class="btn btn-primary">Вход</a>
+</form>

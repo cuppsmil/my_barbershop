@@ -1,0 +1,65 @@
+﻿@model IEnumerable<My_Barbershop.Models.ViewModels.ServiceViewModel>
+@{
+    ViewData["Title"] = "Услуги";
+    Layout = "_Layout";
+}
+
+<h2>Услуги</h2>
+<a asp-action="Dashboard" class="btn btn-success mb-3">Перейти к панели администратора</a>
+<a asp-action="CreateService" class="btn btn-success mb-3">Добавить услугу</a>
+<form method="get" asp-action="ServiceIndex">
+    <div class="input-group mb-3">
+        <input type="text" name="search" value="@ViewBag.Search" class="form-control" placeholder="Поиск по названию" />
+        <button class="btn btn-outline-secondary" type="submit">Поиск</button>
+    </div>
+</form>
+<a asp-action="ExportServiceToExcel"
+   asp-route-sortField="@ViewBag.SortField"
+   asp-route-sortOrder="@ViewBag.SortOrder"
+   asp-route-search="@ViewBag.Search"
+   class="btn btn-success mb-3">Экспортировать в Excel</a>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="ServiceIndex"
+                   asp-route-sortField="ServName"
+                   asp-route-sortOrder="@(ViewBag.SortField == "ServName" && ViewBag.SortOrder == "asc" ? "desc" : "asc")">
+                    Название
+                </a>
+            </th>
+            <th>
+                <a asp-action="ServiceIndex"
+                   asp-route-sortField="Durofwork"
+                   asp-route-sortOrder="@(ViewBag.SortField == "Durofwork" && ViewBag.SortOrder == "asc" ? "desc" : "asc")">
+                    Длительность
+                </a>
+            </th>
+            <th>
+                <a asp-action="ServiceIndex"
+                   asp-route-sortField="ServPrice"
+                   asp-route-sortOrder="@(ViewBag.SortField == "ServPrice" && ViewBag.SortOrder == "asc" ? "desc" : "asc")">
+                    Стоимость
+                </a>
+            </th>
+            <th>Клиентов</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ServName</td>
+                <td>@item.Durofwork мин.</td>
+                <td>@item.ServPrice ₽</td>
+                <td>@item.AppointmentCount</td>
+                <td>
+                    <a asp-action="EditService" asp-route-id="@item.ServName" class="btn btn-sm btn-primary">Редактировать</a>
+                    <a asp-action="DeleteService" asp-route-id="@item.ServName" class="btn btn-sm btn-danger">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

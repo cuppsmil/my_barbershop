@@ -1,0 +1,33 @@
+﻿@model My_Barbershop.Models.Barber
+@{
+    ViewData["Title"] = "Добавить барбера";
+    Layout = "_Layout";
+}
+
+<h4>Новый барбер</h4>
+<hr />
+<form asp-action="CreateBarber">
+    <div class="form-group mb-3">
+        <label asp-for="BarberFio"></label>
+        <input asp-for="BarberFio" class="form-control" />
+        <span asp-validation-for="BarberFio" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="BarberPhnumber"></label>
+        <input asp-for="BarberPhnumber" class="form-control" />
+        <span asp-validation-for="BarberPhnumber" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="BarberPassport"></label>
+        <input asp-for="BarberPassport" class="form-control" />
+        <span asp-validation-for="BarberPassport" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="BNum"></label>
+        <input asp-for="BNum" class="form-control" />
+        <span asp-validation-for="BNum" class="text-danger"></span>
+    </div>
+   
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a asp-action="BarberIndex" class="btn btn-secondary">Назад</a>
+</form>

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<My_Barbershop.Models.ViewModels.AppointmentViewModel>
+@{
+    ViewData["Title"] = "Записи на стрижку";
+    Layout = "_Layout";
+}
+
+<h2>Записи</h2>
+<a asp-action="Dashboard" class="btn btn-success mb-3">Перейти к панели администратора</a>
+<a asp-action="CreateAppointment" class="btn btn-success mb-3">Добавить запись</a>
+<h4>Экспорт отчета</h4>
+<form asp-action="ExportReport" method="post">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label>Дата начала</label>
+            <input type="date" name="startDate" class="form-control" required />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Дата окончания</label>
+            <input type="date" name="endDate" class="form-control" required />
+        </div>
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">Выгрузить отчет</button>
+        </div>
+    </div>
+</form>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="AppointmentIndex"
+                   asp-route-sortField="Appointmentdate"
+                   asp-route-sortOrder="@(ViewBag.SortField == "Appointmentdate" && ViewBag.SortOrder == "asc" ? "desc" : "asc")">
+                    Дата
+                </a>
+            </th>
+            <th>
+                <a asp-action="AppointmentIndex"
+                   asp-route-sortField="Appointmenttime"
+                   asp-route-sortOrder="@(ViewBag.SortField == "Appointmenttime" && ViewBag.SortOrder == "asc" ? "desc" : "asc")">
+                    Время
+                </a>
+            </th>
+            <th>
+                <a asp-action="AppointmentIndex"
+                   asp-route-sortField="Barber"
+                   asp-route-sortOrder="@(ViewBag.SortField == "Barber" && ViewBag.SortOrder == "asc" ? "desc" : "asc")">
+                    Барбер
+                </a>
+            </th>
+            <th>
+                <a asp-action="AppointmentIndex"
+                   asp-route-sortField="Client"
+                   asp-route-sortOrder="@(ViewBag.SortField == "Client" && ViewBag.SortOrder == "asc" ? "desc" : "asc")">
+                    Клиент
+                </a>
+            </th>
+            <th>
+                <a asp-action="AppointmentIndex"
+                   asp-route-sortField="Service"
+                   asp-route-sortOrder="@(ViewBag.SortField == "Service" && ViewBag.SortOrder == "asc" ? "desc" : "asc")">
+                    Услуга
+                </a>
+            </th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Appointmentdate.ToString("yyyy-MM-dd")</td>
+                <td>@item.Appointmenttime.ToString(@"hh\:mm")</td>
+                <td>@item.BarberFio</td>
+                <td>@item.ClientFio</td>
+                <td>@item.ServiceName</td>
+                <td>
+                    <a asp-action="EditAppointment" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Редактировать</a>
+                    <a asp-action="DeleteAppointment" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

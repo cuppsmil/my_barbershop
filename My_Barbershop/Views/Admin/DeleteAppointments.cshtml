@@ -1,0 +1,14 @@
+﻿@model My_Barbershop.Models.Barber
+
+@{
+    ViewData["Title"] = "Подтверждение удаления записей";
+    Layout = "_Layout";
+}
+
+<h3>Вы уверены, что хотите удалить все записи этого барбера?</h3>
+
+<form asp-action="DeleteAppointmentsConfirmed" method="post">
+    <input type="hidden" name="id" value="@Model.BarberPassport" />
+    <button type="submit" class="btn btn-danger">Да, удалить записи</button>
+    <a asp-action="DeleteBarber" asp-route-id="@Model.BarberPassport" class="btn btn-secondary">Отмена</a>
+</form>

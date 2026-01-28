@@ -1,0 +1,48 @@
+﻿@model IEnumerable<My_Barbershop.Models.Appointment>
+@{
+    ViewData["Title"] = "Мои записи";
+    Layout = "_Layout";
+}
+
+<h4>Мои записи</h4>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">У вас пока нет записей</div>
+}
+else
+{
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Барбер</th>
+                <th>Дата</th>
+                <th>Время</th>
+                <th>Услуга</th>
+                <th>Цена</th>
+                <th>Длительность</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.BarberpassportNavigation?.BarberFio</td>
+                    <td>@item.Appointmentdate.ToString("yyyy-MM-dd")</td>
+                    <td>@item.Appointmenttime.ToString("HH:mm")</td>
+                    <td>@item.ServicenameNavigation?.ServName</td>
+                    <td>@item.ServicenameNavigation?.ServPrice ₽</td>
+                    <td>@item.ServicenameNavigation?.Durofwork мин.</td>
+                    <td>
+                        <form asp-action="CancelAppointment" method="post">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm">Отменить</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<a asp-action="Profile" class="btn btn-secondary">Назад</a>

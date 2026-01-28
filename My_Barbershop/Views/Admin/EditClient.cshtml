@@ -1,0 +1,37 @@
+﻿@model My_Barbershop.Models.Client
+@{
+    ViewData["Title"] = "Редактировать клиента";
+    Layout = "_Layout";
+}
+
+<h4>Редактировать данные клиента</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditClient" method="post">
+            <input type="hidden" asp-for="ClientPhnum" />
+
+            <div class="form-group mb-3">
+                <label asp-for="ClFio">ФИО</label>
+                <input asp-for="ClFio" class="form-control" />
+                <span asp-validation-for="ClFio" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="DiscountCard">Дисконтная карта</label>
+                <input asp-for="DiscountCard" class="form-control" />
+                <span asp-validation-for="DiscountCard" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="BonusPoints">Бонусные баллы</label>
+                <input asp-for="BonusPoints" class="form-control" />
+                <span asp-validation-for="BonusPoints" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a asp-action="ClientIndex" class="btn btn-secondary">Отмена</a>
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+        </form>
+    </div>
+</div>

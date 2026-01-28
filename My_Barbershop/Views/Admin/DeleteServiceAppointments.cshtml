@@ -1,0 +1,14 @@
+﻿@model My_Barbershop.Models.Service
+
+@{
+    ViewData["Title"] = "Удалить записи по услуге";
+    Layout = "_Layout";
+}
+
+<h3>Вы уверены, что хотите удалить все записи по услуге "@Model.ServName"?</h3>
+
+<form asp-action="DeleteServiceAppointmentsConfirmed" method="post">
+    <input type="hidden" name="id" value="@Model.ServName" />
+    <button type="submit" class="btn btn-danger">Да, удалить все записи</button>
+    <a asp-action="DeleteService" asp-route-id="@Model.ServName" class="btn btn-secondary">Отмена</a>
+</form>

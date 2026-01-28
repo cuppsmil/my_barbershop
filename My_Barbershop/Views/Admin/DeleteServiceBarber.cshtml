@@ -1,0 +1,18 @@
+﻿@model My_Barbershop.Models.Service
+
+@{
+    ViewData["Title"] = "Удалить связи барберов";
+    Layout = "_Layout";
+}
+
+<h3>Вы уверены, что хотите удалить все назначения барберов для услуги "@Model.ServName"?</h3>
+
+<form asp-action="DeleteServiceBarberConfirmed" method="post">
+    <input type="hidden" name="id" value="@Model.ServName" />
+    <button type="submit" class="btn btn-danger">Да, удалить все назначения</button>
+    <a asp-action="DeleteService" asp-route-id="@Model.ServName" class="btn btn-secondary">Отмена</a>
+</form>
+
+<div class="alert alert-warning mt-3">
+    <strong>Внимание!</strong> У этой услуги есть @ViewBag.BarberServiceCount барберов, которые её оказывают.
+</div>

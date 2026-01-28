@@ -1,0 +1,72 @@
+﻿@model IEnumerable<My_Barbershop.Models.Barber>
+@{
+    ViewData["Title"] = "Барберы";
+    Layout = "_Layout";
+}
+
+<h2>Барберы</h2>
+<a asp-action="Dashboard" class="btn btn-success mb-3">Перейти к панели администратора</a>
+<a asp-action="CreateBarber" class="btn btn-success mb-3">Добавить барбера</a>
+<form method="get" asp-action="BarberIndex">
+    <div class="input-group mb-3">
+        <input type="text" name="search" value="@ViewBag.Search" class="form-control" placeholder="Поиск по ФИО или телефону" />
+        <button class="btn btn-outline-secondary" type="submit">Поиск</button>
+    </div> 
+</form>
+<a asp-action="ExportBarberToExcel"
+   asp-route-sortField="@ViewBag.SortField"
+   asp-route-sortOrder="@ViewBag.SortOrder"
+   asp-route-search="@ViewBag.Search"
+   class="btn btn-success mb-3">Экспортировать в Excel</a>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="BarberIndex"
+                   asp-route-sortField="BarberPassport"
+                   asp-route-sortOrder="@(ViewBag.SortField == "BarberPassport" && ViewBag.SortOrder == "asc" ? "desc" : "asc")">
+                    Паспорт
+                </a>
+            </th>
+
+            <th>
+                <a asp-action="BarberIndex"
+                   asp-route-sortField="BarberFio"
+                   asp-route-sortOrder="@(ViewBag.SortField == "BarberFio" && ViewBag.SortOrder == "asc" ? "desc" : "asc")">
+                    ФИО
+                </a>
+            </th>
+            <th>
+                <a asp-action="BarberIndex"
+                   asp-route-sortField="BarberPhnumber"
+                   asp-route-sortOrder="@(ViewBag.SortField == "BarberPhnumber" && ViewBag.SortOrder == "asc" ? "desc" : "asc")">
+                    Телефон
+                </a>
+            </th>
+            <th>
+                <a asp-action="BarberIndex"
+                   asp-route-sortField="Barbershop"
+                   asp-route-sortOrder="@(ViewBag.SortField == "Barbershop" && ViewBag.SortOrder == "asc" ? "desc" : "asc")">
+                    Барбершоп
+                </a>
+            </th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.BarberPassport</td>
+                <td>@item.BarberFio</td>
+                <td>@item.BarberPhnumber</td>
+                <td>@(item.BNumNavigation?.Name ?? "Нет")</td> 
+                <td>
+                    <a asp-action="EditBarber" asp-route-id="@item.BarberPassport" class="btn btn-sm btn-primary">Редактировать</a>
+                    <a asp-action="DeleteBarber" asp-route-id="@item.BarberPassport" class="btn btn-sm btn-danger">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

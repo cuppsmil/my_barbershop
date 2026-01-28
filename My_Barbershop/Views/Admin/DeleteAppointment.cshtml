@@ -1,0 +1,30 @@
+﻿@model My_Barbershop.Models.ViewModels.AppointmentViewModel
+
+@{
+    ViewData["Title"] = "Удалить запись";
+    Layout = "_Layout";
+}
+
+<h3>Вы уверены, что хотите удалить эту запись?</h3>
+
+<form asp-action="DeleteAppointmentConfirmed" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <div class="mb-3">
+        <strong>Дата:</strong> @Model.Appointmentdate.ToString("yyyy-MM-dd")
+    </div>
+    <div class="mb-3">
+        <strong>Время:</strong> @Model.Appointmenttime
+    </div>
+    <div class="mb-3">
+        <strong>Барбер:</strong> @Model.BarberFio
+    </div>
+    <div class="mb-3">
+        <strong>Клиент:</strong> @Model.ClientFio
+    </div>
+    <div class="mb-3">
+        <strong>Услуга:</strong> @Model.ServiceName
+    </div>
+
+    <button type="submit" class="btn btn-danger">Да, удалить</button>
+    <a asp-action="AppointmentIndex" class="btn btn-secondary">Отмена</a>
+</form>

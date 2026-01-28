@@ -1,0 +1,31 @@
+﻿@model My_Barbershop.Models.ViewModels.ServiceViewModel
+
+@{
+    ViewData["Title"] = "Добавить услугу";
+    Layout = "_Layout";
+}
+
+<h4>Новая услуга</h4>
+<form asp-action="CreateService">
+    <div class="form-group mb-3">
+        <label asp-for="ServName">Название услуги</label>
+        <input asp-for="ServName" class="form-control" />
+        <span asp-validation-for="ServName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Durofwork">Длительность (мин.)</label>
+        <input asp-for="Durofwork" class="form-control" />
+        <span asp-validation-for="Durofwork" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="ServPrice">Стоимость</label>
+        <input asp-for="ServPrice" class="form-control" />
+        <span asp-validation-for="ServPrice" class="text-danger"></span>
+    </div>
+   
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a asp-action="ServiceIndex" class="btn btn-secondary">Назад</a>
+</form>
