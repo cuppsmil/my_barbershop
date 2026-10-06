@@ -22,6 +22,8 @@
 - .NET 8
 - ASP.NET Core
 - PostgreSQL
+- Razor
+- HTML/CSS
 
 ## Установка и запуск
 
